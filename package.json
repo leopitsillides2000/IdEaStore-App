@@ -1,0 +1,25 @@
+{
+  "name": "example-basic",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@solidjs/meta": "^0.29.3",
+    "@solidjs/router": "^0.13.3",
+    "@solidjs/start": "^1.0.0-rc.0",
+    "@suid/icons-material": "^0.7.0",
+    "@suid/material": "^0.16.0",
+    "@suid/vite-plugin": "^0.2.0",
+    "solid-js": "^1.8.17",
+    "typescript": "^5.4.5",
+    "vinxi": "^0.3.11",
+    "vite": "^5.2.11",
+    "vite-plugin-solid": "^2.10.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
