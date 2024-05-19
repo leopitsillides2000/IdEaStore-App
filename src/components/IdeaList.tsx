@@ -5,9 +5,14 @@ import { Idea } from "../models/Idea";
 interface IdeaListProps {
   ideas: Idea[];
   setSelectedIdea: (idea: Idea) => Idea;
+  setCloseBig: (close: Boolean) => Boolean;
 }
 
-export default function IdeaList({ ideas, setSelectedIdea }: IdeaListProps) {
+export default function IdeaList({
+  ideas,
+  setSelectedIdea,
+  setCloseBig,
+}: IdeaListProps) {
   return (
     <div>
       <List
@@ -28,6 +33,7 @@ export default function IdeaList({ ideas, setSelectedIdea }: IdeaListProps) {
                 return idea;
               }}
               setSelectedIdea={setSelectedIdea}
+              setCloseBig={setCloseBig}
             />
             {/* </ListItemButton> */}
           </ListItem>

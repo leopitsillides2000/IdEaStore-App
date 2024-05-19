@@ -85,16 +85,25 @@ const testIdeas: Idea[] = [
 
 export default function Home() {
   const [selectedIdea, setSelectedIdea] = createSignal<Idea>(testIdeas[0]);
+  const [closeBig, setCloseBig] = createSignal(false);
 
   return (
     <div>
       <LoginAppBar />
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <IdeaList ideas={testIdeas} setSelectedIdea={setSelectedIdea} />
+          <IdeaList
+            ideas={testIdeas}
+            setSelectedIdea={setSelectedIdea}
+            setCloseBig={setCloseBig}
+          />
         </Grid>
         <Grid item xs={8}>
-          <IdeaBig idea={selectedIdea} />
+          <IdeaBig
+            idea={selectedIdea}
+            close={closeBig}
+            setClose={setCloseBig}
+          />
         </Grid>
       </Grid>
       {/* <Stack direction="row">

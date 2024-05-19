@@ -16,19 +16,29 @@ import { createSignal } from "solid-js";
 interface IdeaSmallProps {
   idea: () => Idea;
   setSelectedIdea: (idea: Idea) => Idea;
+  setCloseBig: (close: Boolean) => Boolean;
 }
 
 const fullname = (firstName: string, lastName: string) => {
   return firstName + " " + lastName;
 };
 
-export default function IdeaSmall({ idea, setSelectedIdea }: IdeaSmallProps) {
+export default function IdeaSmall({
+  idea,
+  setSelectedIdea,
+  setCloseBig,
+}: IdeaSmallProps) {
   const [anchorEl, setAnchorEl] = createSignal<HTMLButtonElement | null>(null);
 
   const handleClick = (
     event: MouseEvent & { currentTarget: HTMLButtonElement }
   ) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleSeeMore = () => {
+    setSelectedIdea(idea());
+    setCloseBig(false);
   };
 
   return (
@@ -54,8 +64,8 @@ export default function IdeaSmall({ idea, setSelectedIdea }: IdeaSmallProps) {
           <Typography variant="body2">{idea().summary}</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={() => setSelectedIdea(idea())}>
-            Learn More
+          <Button size="small" onClick={handleSeeMore}>
+            See More
           </Button>
         </CardActions>
       </Card>

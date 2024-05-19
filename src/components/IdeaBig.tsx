@@ -14,14 +14,16 @@ import { createSignal } from "solid-js";
 
 interface IdeaBigProps {
   idea: () => Idea;
+  close: () => Boolean;
+  setClose: (close: Boolean) => Boolean;
 }
 
 const fullname = (firstName: string, lastName: string) => {
   return firstName + " " + lastName;
 };
 
-export default function IdeaBig({ idea }: IdeaBigProps) {
-  const [close, setClose] = createSignal(false);
+export default function IdeaBig({ idea, close, setClose }: IdeaBigProps) {
+  // const [close, setClose] = createSignal(false);
 
   return (
     <div
