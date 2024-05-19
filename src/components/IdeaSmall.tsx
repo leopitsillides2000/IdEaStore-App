@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Divider,
   IconButton,
   Typography,
 } from "@suid/material";
@@ -15,6 +16,7 @@ import { createSignal, createEffect } from "solid-js";
 
 interface IdeaSmallProps {
   idea: () => Idea;
+  selectedIdea: () => Idea;
   setSelectedIdea: (idea: Idea) => Idea;
   setCloseBig: (close: Boolean) => Boolean;
 }
@@ -25,6 +27,7 @@ const fullname = (firstName: string, lastName: string) => {
 
 export default function IdeaSmall({
   idea,
+  selectedIdea,
   setSelectedIdea,
   setCloseBig,
 }: IdeaSmallProps) {
@@ -65,7 +68,17 @@ export default function IdeaSmall({
           />
         </Card>
       ) : (
-        <Card sx={cardStyle}>
+        <Card
+          sx={
+            selectedIdea().uuid === idea().uuid
+              ? {
+                  ...cardStyle,
+                  borderColor: "black",
+                  borderWidth: "2px",
+                }
+              : cardStyle
+          }
+        >
           <CardHeader
             action={
               <IconButton aria-label="settings" onClick={handleClick}>
@@ -78,6 +91,7 @@ export default function IdeaSmall({
               idea().author.lastName
             )}
           />
+
           <CardContent>
             <Typography variant="body2">{idea().summary}</Typography>
           </CardContent>
@@ -103,5 +117,5 @@ const cardStyle = {
   minWidth: "100%",
   width: "100%",
   overflow: "ellipsis",
-  border: "1px solid black",
+  border: "1px solid gray",
 };

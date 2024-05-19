@@ -41,7 +41,7 @@ export default function IdeaBig({ idea, close, setClose }: IdeaBigProps) {
         <Card
           sx={{
             overflow: "auto",
-            border: "1px solid black",
+            border: "1px solid gray",
           }}
         >
           <CardHeader

@@ -96,6 +96,7 @@ export default function Home() {
         <Grid item xs={4}>
           <IdeaList
             ideas={testIdeas}
+            selectedIdea={selectedIdea}
             setSelectedIdea={setSelectedIdea}
             setCloseBig={setCloseBig}
           />
