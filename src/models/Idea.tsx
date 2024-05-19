@@ -8,4 +8,6 @@ export interface Idea {
   description: string;
   created: Date;
   updated: Date;
+  starred?: Boolean;
+  hidden?: Boolean;
 }

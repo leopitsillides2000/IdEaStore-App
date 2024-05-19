@@ -1,7 +1,4 @@
-import Cloud from "@suid/icons-material/Cloud";
-import ContentCopy from "@suid/icons-material/ContentCopy";
-import ContentCut from "@suid/icons-material/ContentCut";
-import ContentPaste from "@suid/icons-material/ContentPaste";
+import { HideSource, StarBorder, Star, Cloud } from "@suid/icons-material";
 import {
   Divider,
   Paper,
@@ -12,10 +9,27 @@ import {
   Typography,
   Popover,
 } from "@suid/material";
-
 import { createSignal } from "solid-js";
 
-function IdeaMenu() {
+interface IdeaMenuProps {
+  starred?: Boolean;
+  setIsHidden: (hidden: Boolean) => Boolean;
+}
+function IdeaMenu({ starred, setIsHidden }: IdeaMenuProps) {
+  const [isStarred, setIsStarred] = createSignal(starred);
+
+  const handleStarChange = () => {
+    setIsStarred(!isStarred());
+
+    // TODO make api call to update star in backend
+  };
+
+  const handleHideChange = () => {
+    setIsHidden(true);
+
+    // TODO make api call to update hidden in backend
+  };
+
   return (
     <Paper
       sx={{
@@ -24,32 +38,21 @@ function IdeaMenu() {
       }}
     >
       <MenuList>
-        <MenuItem>
+        <MenuItem onClick={handleHideChange}>
           <ListItemIcon>
-            <ContentCut fontSize="small" />
+            <HideSource fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Cut</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘X
-          </Typography>
+          <ListItemText>Hide</ListItemText>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleStarChange}>
           <ListItemIcon>
-            <ContentCopy fontSize="small" />
+            {isStarred() ? (
+              <Star fontSize="small" />
+            ) : (
+              <StarBorder fontSize="small" />
+            )}
           </ListItemIcon>
-          <ListItemText>Copy</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘C
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <ContentPaste fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Paste</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘V
-          </Typography>
+          <ListItemText>Star</ListItemText>
         </MenuItem>
         <Divider />
         <MenuItem>
@@ -66,15 +69,20 @@ function IdeaMenu() {
 interface IdeaMenuPopoverProps {
   anchorEl: () => HTMLButtonElement | null;
   setAnchorEl: (anchorEl: HTMLButtonElement | null) => void;
+  starred?: Boolean;
+  setIsHidden: (hidden: Boolean) => Boolean;
 }
 
 export default function IdeaMenuPopover({
   anchorEl,
   setAnchorEl,
+  starred,
+  setIsHidden,
 }: IdeaMenuPopoverProps) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  // const [open, setOpen] = createSignal(Boolean(anchorEl()));
 
   const open = () => Boolean(anchorEl());
   const id = () => (open() ? "simple-popover" : undefined);
@@ -91,7 +99,7 @@ export default function IdeaMenuPopover({
           horizontal: "left",
         }}
       >
-        <IdeaMenu />
+        <IdeaMenu starred={starred} setIsHidden={setIsHidden} />
       </Popover>
     </div>
   );

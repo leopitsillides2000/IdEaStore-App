@@ -33,6 +33,7 @@ const testIdeas: Idea[] = [
       "This is the first idea. What happens if we add a lot more text to this section so it has to drop a line?",
     created: new Date(),
     updated: new Date(),
+    starred: false,
   },
   {
     uuid: "2",
@@ -80,6 +81,7 @@ const testIdeas: Idea[] = [
       "This is the extra idea, what we will see in the frontend UI. It is helpful to see roughly how it will look in the UI.",
     created: new Date(),
     updated: new Date(),
+    starred: true,
   },
 ];
 
