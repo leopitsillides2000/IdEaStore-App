@@ -10,3 +10,10 @@ services:
     build: ./dashboard
     ports:
       - 5173:5173
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./dashboard
+          target: /dashboard
+          ignore:
+            - node_modules
