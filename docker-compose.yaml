@@ -1,20 +1,27 @@
-version: "3"
-
 services:
+  # To add to db currently docker exec and use psql
   db:
     container_name: db
-    image: postgres
+    image: postgres:17
     ports:
       - 5432:5432
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+    restart: on-failure
+    healthcheck:
+      test: "PGPASSWORD=${POSTGRES_PASSWORD} pg_isready -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
+ 
   api:
     container_name: api
     build: ./api
     ports:
       - 5000:5000
+
   dashboard:
     container_name: dashboard
     build: ./dashboard
